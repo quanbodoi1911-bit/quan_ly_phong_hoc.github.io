@@ -223,10 +223,11 @@ th {
 /* Trang dang nhap */
 .login-page {
     min-height: 100vh;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    background: #f0f4fa;
-    padding: 22px;
+    background: #202326;
+    padding: 5px;
     gap: 0;
     align-items: stretch;
 }
@@ -234,12 +235,13 @@ th {
 .login-hero {
     background: linear-gradient(145deg, #1c3e6d, #447ab6);
     color: white;
-    border-radius: 14px 0 0 14px;
-    padding: 28px 36px;
+    border-radius: 10px 0 0 10px;
+    padding: 40px;
     position: relative;
     overflow: hidden;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .back-link {
@@ -250,41 +252,43 @@ th {
     text-decoration: none;
     font-size: 25px;
 }
-
 .hero-content {
     position: relative;
     z-index: 1;
-    max-width: 460px;
-    margin: 25px auto;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .hero-logo {
-    font-size: 34px;
-    margin-bottom: 24px;
+    font-size: 45px;
+    margin-bottom: 25px;
 }
 
 .hero-content h1 {
-    font-size: 32px;
-    line-height: 1.35;
-    margin-bottom: 12px;
+    font-size: 36px;
+    line-height: 1.4;
+    margin-bottom: 15px;
 }
 
 .hero-content p {
-    font-size: 15px;
+    font-size: 16px;
     color: #e0eafa;
 }
 
 .campus-art {
-    margin-top: 55px;
-    height: 230px;
+    margin-top: 40px;
+    width: 100%;
+    height: 300px;
     border-radius: 12px;
     background: linear-gradient(180deg, #8db1d0, #dbe5eb);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 110px;
+    font-size: 130px;
     box-shadow: 0 20px 35px #10233f35;
 }
+
 
 .login-card {
     align-self: center;
