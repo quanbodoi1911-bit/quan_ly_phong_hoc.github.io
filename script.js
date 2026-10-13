@@ -1,47 +1,36 @@
-```javascript
-// ==================================================
-// THANH VIEN 1: DANG NHAP / DANG XUAT
-// ==================================================
-
+// THANH VIEN 1: DANG NHAP
 document.addEventListener("DOMContentLoaded", function() {
-
-    // Lay form dang nhap
     var loginForm = document.getElementById("loginForm");
 
-    // Xu ly khi nguoi dung nhan nut dang nhap
-    loginForm.addEventListener("submit", function(event) {
-        event.preventDefault();
+    if (loginForm) {
+        loginForm.addEventListener("submit", function(event) {
+            event.preventDefault();
 
-        // Lay ten dang nhap, mat khau va vai tro
-        var username = document.getElementById("username").value.trim();
-        var password = document.getElementById("password").value;
-        var role = document.getElementById("role").value;
+            var username = document.getElementById("username").value.trim();
+            var password = document.getElementById("password").value;
+            var role = document.getElementById("role").value;
 
-        // Kiem tra tai khoan demo
-        if (username === "admin" && password === "admin123") {
+            var loginPage = document.getElementById("loginPage");
+            var app = document.getElementById("app");
+            var loginError = document.getElementById("loginError");
 
-            // An trang dang nhap va hien thi giao dien chinh
-            document.getElementById("loginPage").classList.add("hidden");
-            document.getElementById("app").classList.remove("hidden");
+            if (username === "admin" && password === "admin123") {
+                loginError.textContent = "";
 
-            // Hien thi ten nguoi dung
-            document.getElementById("currentUser").innerText =
-                role === "admin" ? "Nguyễn Văn A" : "Giảng viên";
+                loginPage.classList.add("hidden");
+                app.classList.remove("hidden");
 
-            // Hien thi vai tro nguoi dung
-            document.getElementById("currentRole").innerText =
-                role === "admin" ? "Admin" : "Giảng viên";
+                document.getElementById("currentUser").textContent = username;
+                document.getElementById("currentRole").textContent =
+                    role === "admin" ? "Quản trị viên" : "Giảng viên";
 
-            // Xoa thong bao loi
-            document.getElementById("loginError").innerText = "";
-
-        } else {
-            // Thong bao neu tai khoan hoac mat khau sai
-            document.getElementById("loginError").innerText =
-                "Tên đăng nhập hoặc mật khẩu không đúng!";
-        }
-    });
-
+            } else {
+                loginError.textContent =
+                    "Tên đăng nhập hoặc mật khẩu không đúng!";
+            }
+        });
+    }
+});
 
     // HIEN / AN MAT KHAU
     document.getElementById("showPassword").addEventListener("click", function() {
