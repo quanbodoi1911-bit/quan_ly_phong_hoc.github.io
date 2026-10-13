@@ -1,1 +1,530 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý phòng học</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<!-- ==================================================
+     THANH VIEN 1: DANG NHAP
+     ================================================== -->
+
+<section class="login-page" id="loginPage">
+
+    <div class="login-hero">
+        <a href="#" class="back-link">←</a>
+
+        <div class="hero-content">
+            <div class="hero-logo">🏫</div>
+
+            <h1>Hệ thống quản lý phòng học</h1>
+
+            <p>Đặt phòng nhanh chóng - Quản lý hiệu quả</p>
+
+            <div class="campus-art">🏫</div>
+        </div>
+    </div>
+
+    <div class="login-card">
+        <h2>Đăng nhập</h2>
+
+        <form id="loginForm">
+
+            <label for="username">Tên đăng nhập</label>
+            <input
+                type="text"
+                id="username"
+                placeholder="Nhập tên đăng nhập"
+                required
+            >
+
+            <label for="password">Mật khẩu</label>
+
+            <div class="password-wrap">
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Nhập mật khẩu"
+                    required
+                >
+
+                <button
+                    type="button"
+                    class="show-password"
+                    id="showPassword"
+                >👁</button>
+            </div>
+
+            <label for="role">Đăng nhập với vai trò</label>
+
+            <select id="role">
+                <option value="admin">Admin</option>
+                <option value="teacher">Giảng viên</option>
+            </select>
+
+            <p class="login-error" id="loginError"></p>
+
+            <button type="submit" class="login-submit">
+                Đăng nhập
+            </button>
+
+            <a href="#" class="forgot" id="forgotPassword">
+                Quên mật khẩu?
+            </a>
+
+        </form>
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     GIAO DIEN QUAN LY SAU KHI DANG NHAP
+     ================================================== -->
+
+<div class="app hidden" id="app">
+
+    <!-- THANH VIEN 1: SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <h2>🏫 Quản lý phòng học</h2>
+
+        <nav>
+            <a href="#" class="active" data-page="dashboard">⌂ Trang chủ</a>
+            <a href="#" data-page="rooms">▣ Quản lý phòng học</a>
+            <a href="#" data-page="calendar">▦ Lịch học</a>
+            <a href="#" data-page="booking">▤ Đặt phòng</a>
+            <a href="#" data-page="requests">▧ Yêu cầu đặt phòng</a>
+            <a href="#" data-page="users">♙ Người dùng</a>
+            <a href="#" data-page="reports">▥ Báo cáo</a>
+        </nav>
+
+        <div class="profile">
+            <div>👤 <span id="currentUser">Quản trị viên</span></div>
+            <small id="currentRole">Admin</small>
+            <br>
+            <button class="logout-button" id="logoutButton">
+                Đăng xuất
+            </button>
+        </div>
+
+    </aside>
+
+
+    <!-- NOI DUNG CAC TRANG -->
+
+    <main class="main">
+
+        <header class="topbar">
+            <input type="text" placeholder="⌕ Tìm kiếm...">
+            <div>🔔　👤</div>
+        </header>
+
+
+        <!-- ==================================================
+             THANH VIEN 2: TRANG CHU DASHBOARD
+             ================================================== -->
+
+        <section class="page" id="dashboard">
+
+            <h1>Dashboard</h1>
+            <p class="sub">Tổng quan hệ thống quản lý phòng học</p>
+
+            <div class="cards">
+
+                <div class="card">
+                    <span class="icon blue">▣</span>
+                    <p>Tổng số phòng</p>
+                    <h2 id="totalRooms">12</h2>
+                </div>
+
+                <div class="card">
+                    <span class="icon green">▣</span>
+                    <p>Phòng đang sử dụng</p>
+                    <h2>5</h2>
+                </div>
+
+                <div class="card">
+                    <span class="icon orange">▣</span>
+                    <p>Phòng trống</p>
+                    <h2>6</h2>
+                </div>
+
+                <div class="card">
+                    <span class="icon purple">▣</span>
+                    <p>Yêu cầu chờ duyệt</p>
+                    <h2 id="pendingCount">3</h2>
+                </div>
+
+            </div>
+
+            <div class="columns">
+
+                <div class="box">
+                    <h3>Thống kê sử dụng phòng học</h3>
+
+                    <div class="chart">
+                        <div style="height:45%"><span>Thứ 2</span></div>
+                        <div style="height:35%"><span>Thứ 3</span></div>
+                        <div style="height:55%"><span>Thứ 4</span></div>
+                        <div style="height:80%"><span>Thứ 5</span></div>
+                        <div style="height:65%"><span>Thứ 6</span></div>
+                        <div style="height:45%"><span>Thứ 7</span></div>
+                        <div style="height:45%"><span>CN</span></div>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <h3>Yêu cầu đặt phòng gần đây</h3>
+
+                    <div class="request-line">
+                        Phòng A101 - 8:00 - 10:00
+                        <span class="tag yellow">Chờ duyệt</span>
+                    </div>
+
+                    <div class="request-line">
+                        Phòng B202 - 13:00 - 15:00
+                        <span class="tag yellow">Chờ duyệt</span>
+                    </div>
+
+                    <div class="request-line">
+                        Phòng C301 - 15:00 - 17:00
+                        <span class="tag green-tag">Đã duyệt</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             THANH VIEN 3: QUAN LY PHONG HOC
+             ================================================== -->
+
+        <section class="page hidden" id="rooms">
+
+            <div class="box-title">
+                <h1>Quản lý phòng học</h1>
+                <button id="addRoomButton">+ Thêm phòng</button>
+            </div>
+
+            <div class="box">
+
+                <h3>Danh sách phòng học</h3>
+
+                <input
+                    type="text"
+                    class="search"
+                    id="roomSearch"
+                    placeholder="Tìm kiếm phòng..."
+                >
+
+                <form id="roomForm" class="hidden">
+
+                    <input type="hidden" id="roomEditIndex">
+
+                    <label for="roomCode">Mã phòng</label>
+                    <input id="roomCode" required>
+
+                    <label for="roomName">Tên phòng</label>
+                    <input id="roomName" required>
+
+                    <label for="roomBuilding">Tòa nhà</label>
+                    <input id="roomBuilding" required>
+
+                    <label for="roomCapacity">Sức chứa</label>
+                    <input id="roomCapacity" type="number" min="1" required>
+
+                    <label for="roomEquipment">Thiết bị</label>
+                    <input id="roomEquipment">
+
+                    <label for="roomStatus">Trạng thái</label>
+                    <select id="roomStatus">
+                        <option value="Trống">Trống</option>
+                        <option value="Đang sử dụng">Đang sử dụng</option>
+                        <option value="Bảo trì">Bảo trì</option>
+                    </select>
+
+                    <button type="submit">Lưu phòng</button>
+                    <button type="button" class="red" id="cancelRoomButton">
+                        Hủy
+                    </button>
+
+                </form>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mã phòng</th>
+                            <th>Tên phòng</th>
+                            <th>Tòa nhà</th>
+                            <th>Sức chứa</th>
+                            <th>Thiết bị</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="roomTable"></tbody>
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             THANH VIEN 4: LICH HOC
+             ================================================== -->
+
+        <section class="page hidden" id="calendar">
+
+            <h1>Lịch học</h1>
+
+            <div class="box">
+
+                <div class="box-title">
+                    <h3 id="calendarTitle">Lịch sử dụng phòng</h3>
+
+                    <div>
+                        <button id="prevMonth">❮</button>
+                        <button id="nextMonth">❯</button>
+                    </div>
+                </div>
+
+                <div class="calendar" id="calendarGrid"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- THANH VIEN 4: DAT PHONG -->
+
+        <section class="page hidden" id="booking">
+
+            <h1>Đặt phòng</h1>
+            <p class="sub">Đặt phòng học theo nhu cầu sử dụng</p>
+
+            <div class="booking-layout">
+
+                <div class="box">
+
+                    <h3>Đặt phòng học</h3>
+
+                    <form id="bookingForm">
+
+                        <label for="bookingRoom">Chọn phòng</label>
+                        <select id="bookingRoom" required></select>
+
+                        <label for="bookingDate">Ngày sử dụng</label>
+                        <input type="date" id="bookingDate" required>
+
+                        <div class="two">
+
+                            <div>
+                                <label for="startTime">Thời gian bắt đầu</label>
+                                <input type="time" id="startTime" required>
+                            </div>
+
+                            <div>
+                                <label for="endTime">Thời gian kết thúc</label>
+                                <input type="time" id="endTime" required>
+                            </div>
+
+                        </div>
+
+                        <label for="bookingPurpose">Mục đích sử dụng</label>
+                        <textarea
+                            id="bookingPurpose"
+                            placeholder="Ví dụ: Học nhóm, họp nhóm, seminar..."
+                            required
+                        ></textarea>
+
+                        <button type="submit">Gửi yêu cầu</button>
+
+                    </form>
+
+                </div>
+
+                <div class="box room-info">
+
+                    <h3>Thông tin phòng</h3>
+
+                    <div class="fake-photo">🏫</div>
+
+                    <p>Mã phòng: <strong id="infoRoomCode">A101</strong></p>
+                    <p>Sức chứa: <strong id="infoCapacity">50 người</strong></p>
+                    <p>Thiết bị: <strong id="infoEquipment">Máy chiếu, loa</strong></p>
+                    <p>Trạng thái: <span class="tag green-tag">Trống</span></p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             THANH VIEN 5: YEU CAU DAT PHONG
+             ================================================== -->
+
+        <section class="page hidden" id="requests">
+
+            <h1>Yêu cầu đặt phòng</h1>
+
+            <div class="box">
+
+                <h3>Danh sách yêu cầu</h3>
+
+                <div class="box-title">
+                    <button data-filter="Chờ duyệt" class="requestFilter">
+                        Chờ duyệt
+                    </button>
+
+                    <button data-filter="Đã duyệt" class="requestFilter">
+                        Đã duyệt
+                    </button>
+
+                    <button data-filter="Từ chối" class="requestFilter">
+                        Từ chối
+                    </button>
+                </div>
+
+                <br>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Người đặt</th>
+                            <th>Phòng</th>
+                            <th>Ngày đặt</th>
+                            <th>Thời gian</th>
+                            <th>Mục đích</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="requestTable"></tbody>
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             THANH VIEN 1: QUAN LY NGUOI DUNG
+             ================================================== -->
+
+        <section class="page hidden" id="users">
+
+            <h1>Quản lý người dùng</h1>
+
+            <div class="box">
+
+                <div class="box-title">
+                    <h3>Danh sách người dùng</h3>
+                    <button id="addUserButton">+ Thêm người dùng</button>
+                </div>
+
+                <form id="userForm" class="hidden">
+
+                    <label for="newUserName">Tên người dùng</label>
+                    <input id="newUserName" required>
+
+                    <label for="newUserRole">Vai trò</label>
+                    <select id="newUserRole">
+                        <option>Admin</option>
+                        <option>Giảng viên</option>
+                    </select>
+
+                    <button type="submit">Thêm người dùng</button>
+
+                </form>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên người dùng</th>
+                            <th>Vai trò</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="userTable"></tbody>
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             THANH VIEN 2: BAO CAO
+             ================================================== -->
+
+        <section class="page hidden" id="reports">
+
+            <h1>Báo cáo</h1>
+            <p class="sub">Thống kê tình hình sử dụng phòng học</p>
+
+            <div class="cards">
+
+                <div class="card">
+                    <p>Tổng số phòng</p>
+                    <h2 id="reportTotalRooms">12</h2>
+                </div>
+
+                <div class="card">
+                    <p>Yêu cầu đặt phòng</p>
+                    <h2 id="reportTotalRequests">3</h2>
+                </div>
+
+                <div class="card">
+                    <p>Yêu cầu đã duyệt</p>
+                    <h2 id="reportApproved">1</h2>
+                </div>
+
+                <div class="card">
+                    <p>Yêu cầu bị từ chối</p>
+                    <h2 id="reportRejected">0</h2>
+                </div>
+
+            </div>
+
+            <div class="box">
+                <h3>Báo cáo sử dụng phòng học</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mã phòng</th>
+                            <th>Tên phòng</th>
+                            <th>Sức chứa</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="reportTable"></tbody>
+                </table>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
